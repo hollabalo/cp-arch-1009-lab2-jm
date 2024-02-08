@@ -4,20 +4,22 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "2"
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"hello-world","namespace":"default"},"spec":{"selector":{"matchLabels":{"run":"hello-world"}},"template":{"metadata":{"labels":{"run":"hello-world"}},"spec":{"containers":[{"image":"scias23/jm-lab9:latest","name":"hello-world","ports":[{"containerPort":8080}]}]}}}}
-  creationTimestamp: "2024-02-08T07:19:24Z"
-  generation: 3
-  name: hello-world
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"nginx"},"name":"jm-deployment","namespace":"default"},"spec":{"replicas":5,"selector":{"matchLabels":{"app":"nginx"}},"template":{"metadata":{"labels":{"app":"nginx"}},"spec":{"containers":[{"image":"nginx:alpine","name":"nginx","ports":[{"containerPort":80}]}]}}}}
+  creationTimestamp: "2024-02-08T07:45:18Z"
+  generation: 4
+  labels:
+    app: nginx
+  name: jm-deployment
   namespace: default
-  resourceVersion: "5556"
-  uid: 7393ad2a-457f-4523-95e5-6edfe1779652
+  resourceVersion: "3032"
+  uid: d6fe2a28-f777-43c0-a60b-7f4309169f12
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      run: hello-world
+      app: nginx
   strategy:
     rollingUpdate:
       maxSurge: 40%
@@ -27,14 +29,14 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        run: hello-world
+        app: nginx
     spec:
       containers:
       - image: scias23/jm-lab9:latest
         imagePullPolicy: IfNotPresent
-        name: hello-world
+        name: nginx
         ports:
-        - containerPort: 8080
+        - containerPort: 80
           protocol: TCP
         resources: {}
         terminationMessagePath: /dev/termination-log
@@ -45,21 +47,21 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
 status:
-  availableReplicas: 1
+  availableReplicas: 3
   conditions:
-  - lastTransitionTime: "2024-02-08T07:21:58Z"
-    lastUpdateTime: "2024-02-08T07:21:58Z"
+  - lastTransitionTime: "2024-02-08T07:45:34Z"
+    lastUpdateTime: "2024-02-08T07:45:34Z"
     message: Deployment has minimum availability.
     reason: MinimumReplicasAvailable
     status: "True"
     type: Available
-  - lastTransitionTime: "2024-02-08T07:19:24Z"
-    lastUpdateTime: "2024-02-08T07:21:58Z"
-    message: ReplicaSet "hello-world-58879c49d6" has successfully progressed.
+  - lastTransitionTime: "2024-02-08T07:45:18Z"
+    lastUpdateTime: "2024-02-08T07:47:35Z"
+    message: ReplicaSet "jm-deployment-6547d49b5b" has successfully progressed.
     reason: NewReplicaSetAvailable
     status: "True"
     type: Progressing
-  observedGeneration: 3
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1
+  observedGeneration: 4
+  readyReplicas: 3
+  replicas: 3
+  updatedReplicas: 3

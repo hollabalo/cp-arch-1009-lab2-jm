@@ -1,18 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-world
+  name: jm-deployment
+  labels:
+    app: nginx
 spec:
+  replicas: 5
   selector:
     matchLabels:
-      run: hello-world
+      app: nginx
   template:
     metadata:
       labels:
-        run: hello-world
+        app: nginx
     spec:
       containers:
-      - name: hello-world
-        image: scias23/jm-lab9:latest
+      - name: nginx
+        image: nginx:alpine
         ports:
-        - containerPort: 8080
+        - containerPort: 80
